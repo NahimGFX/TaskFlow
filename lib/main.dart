@@ -18,7 +18,71 @@ class TaskFlowApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const WelcomeScreen(),
+      home: const TaskListScreen(),
+    );
+  }
+}
+
+class Task {
+  const Task({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.priority,
+    required this.isCompleted,
+  });
+
+  final int id;
+  final String title;
+  final String description;
+  final String priority;
+  final bool isCompleted;
+}
+
+const demoTasks = [
+Task(id: 1, title: 'Estudiar programación', description: 'Practicar ejercicios de desarrollo', priority: 'Alta', isCompleted: false),
+Task(id: 2, title: 'Hacer ejercicio', description: 'Realizar una rutina de 30 minutos', priority: 'Media', isCompleted: false),
+Task(id: 3, title: 'Ordenar mi habitación', description: 'Organizar el escritorio y la ropa', priority: 'Baja', isCompleted: true),
+Task(id: 4, title: 'Avanzar proyecto universitario', description: 'Completar las actividades pendientes', priority: 'Alta', isCompleted: false),
+Task(id: 5, title: 'Aprender algo nuevo', description: 'Ver un tutorial sobre diseño o tecnología', priority: 'Media', isCompleted: false),
+];
+
+class TaskCard extends StatelessWidget {
+  const TaskCard({super.key, required this.task});
+
+  final Task task;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        leading: Icon(
+          task.isCompleted ? Icons.check_circle : Icons.radio_button_unchecked,
+          color: task.isCompleted ? Colors.green : null,
+        ),
+        title: Text(task.title),
+        subtitle: Text(task.priority + ' · ' + task.description),
+        trailing: const Icon(Icons.chevron_right),
+      ),
+    );
+  }
+}
+
+class TaskListScreen extends StatelessWidget {
+  const TaskListScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Mis tareas')) ,
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: demoTasks.length,
+        itemBuilder: (context, index) {
+          final task = demoTasks[index];
+          return TaskCard(task: task);
+        },
+      ),
     );
   }
 }
@@ -31,7 +95,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  final String studentName = 'Escribe tu nombre';
+  final String studentName = 'Nahim Simba Mero';
   static const dailyGoal = 5;
   int pendingTasks = 3;
   int completedTasks = 0;
