@@ -55,7 +55,7 @@ Formulario: campos de título, descripción y prioridad.
 La navegación debe tener textos comprensibles.
 Un id inexistente debe mostrar un mensaje en vez de cerrar la app.
 
-### Contrato de API que necesitaremos
+### Contrato de API
 
 GET /tasks listar tareas
 GET /tasks/:id consultar detalle
